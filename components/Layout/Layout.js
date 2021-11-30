@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { Container } from "semantic-ui-react";
 import HeadTags from "./HeadTags";
 import NavBar from "./NavBar";
+
 const Layout = ({ children }) => {
   const router = useRouter();
 
@@ -29,10 +30,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <HeadTags />
-      <NavBar />
-      <Container text style={{ paddingTop: "1rem" }}>
-        {children}
-      </Container>
+      {router.pathname !== "/" && <NavBar />}
+      <Container style={{ paddingTop: "1rem" }}>{children}</Container>
     </>
   );
 };
