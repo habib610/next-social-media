@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { Divider, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
 import {
     FooterMessage,
@@ -16,6 +16,7 @@ const Signup = () => {
         username: "",
         bio: "",
     });
+    const btnRef = createRef();
     const { name, email, password, bio, username } = user;
     const handleFieldChange = (e) => {
         e.preventDefault();
@@ -25,6 +26,8 @@ const Signup = () => {
     const [showPass, setShowPass] = useState(false);
     const [loadingUsername, setLoadingUserName] = useState(false);
     const [userNameError, setUserNameError] = useState(false);
+    const [disableButton, setDisableButton] = useState(true);
+
     const handleUserName = (e) => {
         setLoadingUserName(true);
 
@@ -37,6 +40,21 @@ const Signup = () => {
             setUserNameError(true);
         }
     };
+
+    useEffect(() => {
+        const isUser = Object.values({
+            name,
+            email,
+            password,
+            bio,
+            username,
+        }).every((item) => Boolean(item));
+        isUser ? setDisableButton(false) : setDisableButton(true);
+    }, [name, email, password, bio, username]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
     return (
         <>
             <Grid columns={2} divided="vertically" stackable>
@@ -46,7 +64,7 @@ const Signup = () => {
                             as="h1"
                             textAlign="center"
                             color="violet"
-                            content="Welcome Back :)"
+                            content="User Registration"
                         />
                         <Image alt="Signup Image" src="./images/home.png" />
                     </Grid.Column>
@@ -129,7 +147,22 @@ const Signup = () => {
                   value={bio}
                   onChange={handleFieldChange}
                 /> */}
+                                {/* <Button
+                                    content="Login"
+                                    color="purple"
+                                    size="large"
+                                    // disabled={disableButton}
+                                /> */}
                             </Form>
+                            <button
+                                icon="signup"
+                                type="submit"
+                                color="orange"
+                                disabled={disableButton}
+                                onClick={handleSubmit}
+                            >
+                                Signup
+                            </button>
                             <Divider hidden />
                             <FooterMessage />
                         </Segment>

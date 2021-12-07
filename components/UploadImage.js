@@ -70,7 +70,7 @@ const UploadImage = () => {
                         alignItems: "center",
                         backgroundColor: highlight
                             ? "rgb(209 209 209 / 60%)"
-                            : "rgb(209 209 209 / 40%)",
+                            : "rgb(209 209 209 / 20%)",
                     }}
                 >
                     <input
@@ -86,12 +86,17 @@ const UploadImage = () => {
                             onClick={() => inputRef.current.click()}
                             src={mediaPreview}
                             alt="profile"
+                            fluid
+                            size="medium"
+                            style={{ maxHeight: "190px" }}
                         />
                     ) : (
-                        <Segment size="mini">
+                        <Segment
+                            size="mini"
+                            onClick={() => inputRef.current.click()}
+                        >
                             <Header icon>
                                 <Icon
-                                    onClick={() => inputRef.current.click()}
                                     name="file image outline"
                                     style={{ cursor: "pointer" }}
                                 />
