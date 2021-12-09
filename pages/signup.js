@@ -8,6 +8,7 @@ import UploadImage from "../components/UploadImage";
 
 const regExUser = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
 
+//  checking git 
 const Signup = () => {
     const [user, setUser] = useState({
         name: "",
